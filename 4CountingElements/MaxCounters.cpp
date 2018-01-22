@@ -4,7 +4,7 @@
 
 using namespace std;
 
-// https://app.codility.com/demo/results/trainingTZD89K-Z7Y/ 원래답
+// 1차답 https://app.codility.com/demo/results/trainingTZD89K-Z7Y/ 
 vector<int> solution(int N, vector<int> &A);
 
 int main () {
