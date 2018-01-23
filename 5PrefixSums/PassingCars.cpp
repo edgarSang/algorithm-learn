@@ -4,6 +4,7 @@
 #include <vector>
 
 // 1차답 90%: https://app.codility.com/demo/results/trainingFS96NM-WT6/
+// 해결완료
 using namespace std;
 
 int solution(vector<int> &A);

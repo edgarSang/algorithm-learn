@@ -3,6 +3,7 @@
 #include <math.h>
 
 // 1차답 50%: https://app.codility.com/demo/results/trainingU9HKJM-MUZ/
+// 해결완료
 using namespace std;
 
 int solution(int A, int B, int K);
