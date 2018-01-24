@@ -3,7 +3,7 @@
 #include <vector>
 #include <numeric> 
 
-
+// 1차답 72%
 using namespace std;
 
 int solution(int X, vector<int> &A);
