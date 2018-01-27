@@ -22,6 +22,7 @@ int main () {
 vector<int> solution(string &S, vector<int> &P, vector<int> &Q) {
     vector<int> v;
     vector<string> strVec;
+    string nu = "ACGT";
 
     for(unsigned int i = 0; i < P.size(); i++) {
         strVec.push_back(S.substr(P[i], Q[i]-P[i]+1));
@@ -30,7 +31,11 @@ vector<int> solution(string &S, vector<int> &P, vector<int> &Q) {
     std::cout << "strVec vector:";
     for (std::vector<string>::iterator it=strVec.begin(); it!=strVec.end(); ++it)
         std::cout << ' ' << *it;
-    std::cout << '\n';    
+    std::cout << '\n'; 
+
+    for(unsigned int i = 0; i < P.size(); i++) {
+        strVec.push_back(S.substr(P[i], Q[i]-P[i]+1));
+    }  
 
     return v;
 }
