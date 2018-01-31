@@ -23,7 +23,7 @@ int push(char t) {
 
 int pop() {
     if (top < 0)
-        return -1;
+        return -5;
     stack[top--];
 }
 
@@ -43,12 +43,10 @@ int main () {
             if(in[j] == ')') {
                 flow = pop();
             }
-            printf("%d %d \n", top, flow);
         }
         
-        if(top == -1 && flow != -1) printf("YES");
+        if(top == -1 && flow != -5) printf("YES");
         else printf("NO");
-        fflush(stdin);
         initStack();
     }
     return 0;
