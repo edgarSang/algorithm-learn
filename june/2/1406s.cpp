@@ -6,27 +6,39 @@ using namespace std;
 
 int cursor;
 int N;
-list<char> data;
+stack<char> L_STACK;
+stack<char> R_STACK;
 
 
 void execCmd (char cmd) {
     char pChar;
 
     if (cmd == 'L') {
-
+        R_STACK.push(L_STACK.top());
+        L_STACK.pop();
     } else if (cmd == 'D') {
-
+        L_STACK.push(R_STACK.top());
+        R_STACK.pop();
     } else if (cmd == 'B') { 
-
+        L_STACK.pop();
     } else if (cmd == 'P') {
-
+        cin >> pChar;
+        R_STACK.push(pChar);
     }
 
-    // cout << "cursor: " << cursor << endl;
-    // cout << "Data: " << data.size();
-    // for (std::list<char>::iterator it=data.begin(); it!=data.end(); ++it)
-    //     std::cout << *it;
-    // cout << "\n";;
+    cout << "Data: ";
+    while (!L_STACK.empty())
+    {
+        std::cout << ' ' << mystack.top();
+        L_STACK.pop();
+    }
+    cout << " |R stack:| ";
+    while (!R_STACK.empty())
+    {
+        std::cout << ' ' << mystack.top();
+        R_STACK.pop();
+    }
+    std::cout << '\n';
 }
 
 int main () {
@@ -36,15 +48,13 @@ int main () {
 
     cin >> line >> N;
     
-    data.assign(line.begin(), line.end());
+    L_STACK.assign(line.begin(), line.end());
 
     for (int i = 0 ; i < N ; i++) {
         cin >> cmd;
         execCmd(cmd);
     }
 
-    for (std::list<char>::iterator it=data.begin(); it!=data.end(); ++it)
-        std::cout << *it;
 
     return 0;
 }
