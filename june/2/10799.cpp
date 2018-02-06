@@ -7,6 +7,9 @@ using namespace std;
 int total = 0;
 stack<char> stick;
 
+// 백준 인강에서는 레이저를 파악할때 스택에 인덱스를 저장해서 전 인덱스와의 차이가 1일때 레이저로 파악했다.
+// ( 일때 +1을 해주지 않고 레이저가 아닌 )때 +1을 해줬었다. 쇠막대기가 하나 더생기는거니까
+// else if 비교식 == (stick.pop() + 1 == i) 이면 레이져
 int main () {
     ios::sync_with_stdio(false);
     string line;
