@@ -4,41 +4,57 @@
 
 using namespace std;
 
-int cursor;
-int N;
 stack<char> L_STACK;
 stack<char> R_STACK;
 
+template <class T>
+void print(stack<T> st)
+{
+    while (!st.empty())
+    {
+        cout << st.top();
+        st.pop();
+    }
+}
+
+template <class T>
+void reverseStack(stack<T>& st)
+{
+    T item;
+    stack<T> tmpStack;
+
+    while (!st.empty())
+    {
+        item = st.top();
+        st.pop();
+        tmpStack.push(item);
+    }
+
+    st = tmpStack;
+    return;
+}
 
 void execCmd (char cmd) {
     char pChar;
 
     if (cmd == 'L') {
-        R_STACK.push(L_STACK.top());
-        L_STACK.pop();
+        if (!L_STACK.empty()) {
+            R_STACK.push(L_STACK.top());
+            L_STACK.pop();
+        }
     } else if (cmd == 'D') {
-        L_STACK.push(R_STACK.top());
-        R_STACK.pop();
+        if(!R_STACK.empty()) {
+            L_STACK.push(R_STACK.top());
+            R_STACK.pop();
+        }
     } else if (cmd == 'B') { 
-        L_STACK.pop();
+        if (!L_STACK.empty()) {
+            L_STACK.pop();
+        }
     } else if (cmd == 'P') {
         cin >> pChar;
-        R_STACK.push(pChar);
+        L_STACK.push(pChar);
     }
-
-    cout << "Data: ";
-    while (!L_STACK.empty())
-    {
-        std::cout << ' ' << mystack.top();
-        L_STACK.pop();
-    }
-    cout << " |R stack:| ";
-    while (!R_STACK.empty())
-    {
-        std::cout << ' ' << mystack.top();
-        R_STACK.pop();
-    }
-    std::cout << '\n';
 }
 
 int main () {
@@ -48,7 +64,8 @@ int main () {
 
     cin >> line >> N;
     
-    L_STACK.assign(line.begin(), line.end());
+    for(int i = 0; i < line.length(); i++)
+		L_STACK.push(line.at(i));
 
     for (int i = 0 ; i < N ; i++) {
         cin >> cmd;
@@ -56,5 +73,10 @@ int main () {
     }
 
 
+    reverseStack(L_STACK);
+    print(L_STACK);
+    print(R_STACK);
+
+    std::cout << '\n';
     return 0;
 }
