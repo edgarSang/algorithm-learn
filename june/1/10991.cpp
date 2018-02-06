@@ -5,7 +5,7 @@ int main () {
     scanf("%d", &n);
 
     for (int i = 1; i <= n; i++) {
-        if(i % 2 == 0) {
+        if(i % 2 == 0) { //짝수줄 일때
             for (unsigned int j = 0 ; j < n-i; j++ ) {
                 printf(" ");
             }
@@ -15,7 +15,7 @@ int main () {
                 else
                     printf("*");
             }
-        } else {
+        } else { // 홀수줄일때
             for (unsigned int j = 0 ; j < n-i ; j++ ) {
                 printf(" ");
             }
