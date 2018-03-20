@@ -1,5 +1,5 @@
 #include <iostream>
-#define MAX 10000
+#define MAX 10001
 
 template <typename T>
 inline T comp(T num1, T num2) {
@@ -8,7 +8,7 @@ inline T comp(T num1, T num2) {
 
 using namespace std;
 
-int d[MAX][3] = {0};
+long long d[MAX][3] = {0};
 int A[MAX] = {0};
 
 void grape(int n) {
