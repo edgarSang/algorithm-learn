@@ -21,15 +21,18 @@ int bi(int n, int A[]) {
             //     mi = j;
             // }
         }
-        for(int c=j+1; c<=n; c++){
-            d[c-1][1] = 1;
-            for(int b=j; b<c; b++) {
-                d[c][1] = A[b] > A[c] ? comp(d[b][1]+1, d[c][1]) : comp(d[c][1], 1);
+        if(j > 1){
+            d[j][1] = 1;
+            for(int c=j+1; c<=n; c++){
+                for(int b=j; b<c; b++) {
+                    // cout << "d[c][1]: " << d[c][1] << endl;
+                    d[c][1] = A[b] > A[c] ? comp(d[c-1][1]+1, d[c][1]) : comp(d[c][1], 1);
+                }
             }
+            for(int c=j; c<=n; c++){
+                cout << d[c][1] << ' ';
+            } cout << '\n';            
         }
-        for(int c=j; c<=n; c++){
-            cout << d[j][1] << ' ';
-        } cout << '\n';
     }
 
     return max;
