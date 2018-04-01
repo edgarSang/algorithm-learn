@@ -14,9 +14,9 @@ int d[MAX][2] = {0};
 
 
 int bi(int n, int A[]) {
-    int max=0; // 오름차순+내림차순 수열 길이 최고값;
-    int aMax=0; // 오름차순 수열 길이 최고값
-    int dMax=0; //내림차순 수열 길이 최고값
+    int max = 0; // 오름차순+내림차순 수열 길이 최고값;
+    int aMax = 0; // 오름차순 수열 길이 최고값
+    int dMax = 0; //내림차순 수열 길이 최고값
     for(int j=1; j<=n; j++){
         for(int i=0; i<j; i++){
             d[j][0] = A[i] < A[j] ? comp(d[i][0]+1, d[j][0]) : comp(d[j][0], 1);
@@ -35,7 +35,10 @@ int bi(int n, int A[]) {
                 d[i][1] = 0;
             }
         }
+
         max = comp(max, aMax+dMax-1);
+
+        
         // cout << max << "=" << " "<< aMax << "+" << dMax << endl;
     }
     return max;
