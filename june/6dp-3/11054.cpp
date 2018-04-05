@@ -19,22 +19,22 @@ int bi(int n, int A[]) {
     int dMax = 0; //내림차순 수열 길이 최고값
     for(int j=1; j<=n; j++){
         for(int i=0; i<j; i++){
-            d[j][0] = A[i] < A[j] ? comp(d[i][0]+1, d[j][0]) : comp(d[j][0], 1);
+            d[j][0] = A[i] < A[j] ? comp(d[i][0]+1, d[j][0]) : comp (d[j][0], 1);
             aMax = comp(d[j][0], aMax);
         }
-        if(j > 1){
-            d[j][1] = 1;
-            dMax = 0;
-            for(int c=j+1; c<=n; c++){
-                for(int b=j; b<c; b++) {
-                    d[c][1] = A[b] > A[c] ? comp(d[b][1]+1, d[c][1]) : comp(d[c][1], 1);
-                    dMax = comp(d[c][1], dMax);              
-                }
-            }         
-            for(int i=0; i<=n; i++){
-                d[i][1] = 0;
+
+        d[j][1] = 1;
+        dMax = 0;
+        for(int c=j; c<=n; c++){
+            for(int b=j-1; b<c; b++) {
+                d[c][1] = A[b] > A[c] ? comp(d[b][1]+1, d[c][1]) : comp(d[c][1], 1);
+                dMax = comp(d[c][1], dMax);              
             }
+        }         
+        for(int i=0; i<=n; i++){
+            d[i][1] = 0;
         }
+
 
         max = comp(max, aMax+dMax-1);
 
