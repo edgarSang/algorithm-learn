@@ -24,8 +24,8 @@ void dfs(int start){
 
         for(int i=0;i<A[top].size();i++) {
             if(check[A[top][i]] == 0) {
-                check[A[top][i]] = 1;
                 printf("%d ", A[top][i]);
+                check[top] = 1;
                 s.push(top);
                 s.push(A[top][i]);
                 break;
