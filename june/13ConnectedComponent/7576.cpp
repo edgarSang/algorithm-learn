@@ -1,3 +1,4 @@
+//입력에서 알아서 띄어쓰기가 들어오면 %1d 쓰지말것 (-1 이 1로인식)
 #include <iostream>
 #include <queue>
 
@@ -18,16 +19,15 @@ int min(int a, int b) {
 bool isArea(int y, int x){
     return ((x>=0 && x<M) && (y>=0 && y<N));
 }
+queue<pair<int, int>> q;
 
-int bfs(int y, int x) {
-    int distance = 2;
-    //일단 시작성공
-    map[y][x] = distance;
-    queue<pair<int, int>> q;
-    q.push(pair<int, int>(y, x));
+int bfs() {
+    int distance = 1;
+    int maxCnt = 0;
+
+    pair<int,int> p;
 
     while(!q.empty()) {
-        pair<int,int> p;
         int qy = p.first = q.front().first;
         int qx = p.second = q.front().second;
         distance++;
@@ -35,11 +35,15 @@ int bfs(int y, int x) {
 
         for(int i=0;i<4;i++) {
             int dy = qy + dir[i][0];
-            int dx = qx - dir[i][1];
+            int dx = qx + dir[i][1];
             
-            if(isArea(dy,dx) && !(map[dy][dx] == -1)) {
-                if(map[dy][dx] == 0 || (map[dy][dx] > map[qy][qx])) {
-                    map[dy][dx] = min(map[qy][qx]+1, distance);
+            // 1일때마다 bfs를 새로 실행하지않고 한번에 큐에 넣고 bfs를 시작하면
+            // || (map[dy][dx] > map[qy][qx]) 
+            // 위 조건이 필요가없다. 왜냐하면 시작점에서 번갈아가면서 bfs 가 돌며, 번갈아가며
+            // 채우면서 결국에는 접점에서 만나기때문이다.
+            if(isArea(dy,dx) && !(map[dy][dx] == -1) ) {
+                if(map[dy][dx] == 0) {
+                    maxCnt = map[dy][dx] = min(map[qy][qx]+1, distance);
                     q.push(pair<int,int>(dy, dx));
                 }
             }
@@ -47,25 +51,39 @@ int bfs(int y, int x) {
         }
     }
 
-    return 0;
+    return maxCnt;
 }
 
-int getSolution() {
+void getSolution() {
+    int maxCnt = 0;
+    int val = 0;
     for(int i=0;i<N;i++) {
         for(int j=0;j<M;j++) {
             if(map[i][j] == 1) {
-                bfs(i, j);
+                q.push(pair<int, int>(i, j));
             }
         }
     }
 
-    for(int i=0;i<N;i++) {
-        for(int j=0;j<M;j++){
-            printf("%d ", map[i][j]);
-        }
-        printf("\n");
-    }
+    maxCnt = bfs();
 
+    // 디버깅용
+    // for(int i=0;i<N;i++) {
+    //     for(int j=0;j<M;j++){
+    //         printf("%d ", map[i][j]);
+    //     }
+    //     printf("\n");
+    // }
+    for(int i=0;i<N;i++) {
+        for(int j=0;j<M;j++) {
+            if(map[i][j] == 0) {
+                printf("%d",-1);
+                return;
+            }
+        }
+    }
+    // 시작점이 원래 0 일로쳐야하는데 구분을 위해 2부터시작해서
+    maxCnt == 0 ? printf("%d", 0) : printf("%d", maxCnt-1);
 }
 
 int main() {
@@ -73,7 +91,7 @@ int main() {
 
     for(int i=0;i<N;i++) {
         for(int j=0;j<M;j++){
-            scanf("%1d", &map[i][j]);
+            scanf("%d", &map[i][j]);
         }
     }
 
