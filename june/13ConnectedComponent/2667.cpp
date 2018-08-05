@@ -4,7 +4,7 @@
 using namespace std;
 
 int map[25][25] = {0,};
-int dir[4][2] = {{-1,0}, {1,0}, {0,-1}, {0,1}};
+int dir[4][2] = {{-1,0}, {1,0}, {0,-1}, {0,1}}; // up down left right
 int n;
 int houseNumber [323] = {0,};
 int cnt = 0;
