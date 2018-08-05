@@ -2,39 +2,50 @@
 #include <vector>
 #include <stack>
 #include <queue>
+#include<algorithm>  
+
+#define MAX 1005
 
 using namespace std;
 
-vector<int> A[10];
-int check[10] = {0};
+vector<int> A[MAX];
+int check[MAX] = {0};
+int N,M,V;
 
-void dfs(int v) {
+void dfs(int start){
     stack<int> s;
-    s.push(v);
-    
+    s.push(start);
+    check[start] = 1;
+    printf("%d ",start);
+
     while(!s.empty()) {
         int top = s.top();
         s.pop();
-        cout << top << " ";
-        check[top] = 1;
 
-        for(int i=0; i<A[top].size(); i++) {
-            if(check[A[top][i]] == 0)
+        for(int i=0;i<A[top].size();i++) {
+            if(check[A[top][i]] == 0) {
+                printf("%d ", A[top][i]);
+                check[top] = 1;
+                s.push(top);
                 s.push(A[top][i]);
-        } 
+                break;
+            }
+        }
     }
-};
+}
 
-void bfs(int v) {
+void bfs(int start) {
     queue<int> q;
-    q.push(v);
+    std::fill_n(check, MAX, 0);
+    q.push(start);
+    check[start] = 1;
 
     while(!q.empty()) {
         int front = q.front();
         q.pop();
-        
-        cout << front << " ";
-        for(int i=0; i<A[front].size(); i++) {
+        printf("%d ",front);
+
+        for(int i=0;i<A[front].size();i++){
             if(check[A[front][i]] == 0) {
                 check[A[front][i]] = 1;
                 q.push(A[front][i]);
@@ -44,14 +55,21 @@ void bfs(int v) {
 }
 
 int main() {
-    int n, v, m;
-    cin >> n >> m >> v;
+    
+    scanf("%d %d %d", &N,&M,&V);
 
-    for(int i=1; i<=m; i++) {
-        int u, s;
-        cin >> u >> s;
-        A[u].push_back(s);
+    for(int i=1;i<=M;i++){
+        int node,e;
+        scanf("%d %d", &node ,&e);
+        A[node].push_back(e);
+        A[e].push_back(node);
     }
+    for (int i = 1; i <= MAX; i++)  
+        sort(A[i].begin(), A[i].end());  
 
-    bfs(v);
+    dfs(V);
+    printf("\n");
+    bfs(V);
+
+    return 0;
 }
