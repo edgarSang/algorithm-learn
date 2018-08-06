@@ -67,11 +67,8 @@ void getSolution() {
 
     maxCnt = bfs();
 
-    // 디버깅용
     // for(int i=0;i<N;i++) {
     //     for(int j=0;j<M;j++){
-    //         printf("%d ", map[i][j]);
-    //     }
     //     printf("\n");
     // }
     for(int i=0;i<N;i++) {
@@ -82,7 +79,7 @@ void getSolution() {
             }
         }
     }
-    // 시작점이 원래 0 일로쳐야하는데 구분을 위해 2부터시작해서
+    // 시작점이 원래 0 일로쳐야하는데 구분을 위해 1부터 제대로시작.
     maxCnt == 0 ? printf("%d", 0) : printf("%d", maxCnt-1);
 }
 
