@@ -14,13 +14,20 @@ struct node {
 vector<node> v[100001];
 int check[100001] = {0,};
 int distanceArr[100001] = {0,};
+int V;
 
 int bfs(int start) {
+    memset(check, 0, sizeof(check));
+    memset(distanceArr, 0, sizeof(distanceArr));
     int maxNode = start;
+    int max = 0;
     queue<int> q;
     q.push(start);
-    memset(check, 0, sizeof(int));
-    memset(distanceArr, 0, sizeof(int));
+    // for(int i=1 ;i<=V; i++) {
+    //     cout << distanceArr[i] << "\n";
+    // }
+    //시작에 초기값을 안넣어줬었음
+    check[start] = 1;
 
     while(!q.empty()) {
         int front = q.front();
@@ -32,7 +39,11 @@ int bfs(int start) {
             if(check[n.to] == 0) {
                 check[n.to] = 1;
                 distanceArr[n.to] = distanceArr[front] + n.distance;
-                // maxNode = distanceArr[n.to] > distanceArr[maxNode] ? n.to : maxNode;
+                //맥스 노드 를 저장하는 로직을 넣어줘야함.
+                if(distanceArr[n.to] > max) {
+                    max = distanceArr[n.to];
+                    maxNode = n.to;
+                }
                 q.push(n.to); 
             }
         }
@@ -42,7 +53,7 @@ int bfs(int start) {
 }
 
 int main () {
-    int V,max;
+    int max = 0;
 
     cin >> V;
     for(int i=1; i<=V; i++) {
@@ -58,17 +69,10 @@ int main () {
             v[j].push_back(node(t,d));
         }
     }
- 
-    bfs(1);
-    for(int i=1; i<=V; i++) {
-        max = distanceArr[i] > max ? i : max;
-    }
-    bfs(max);
-    max = 0;
-    for(int i=1; i<=V; i++) {
-        max = distanceArr[i] > max ? distanceArr[i] : max;
-    }
-    cout << max << "\n";
+    
+    max = bfs(1);
+
+    cout << distanceArr[bfs(max)] << "\n";
     
     return 0;
 }
