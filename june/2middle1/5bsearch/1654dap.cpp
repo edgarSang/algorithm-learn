@@ -56,6 +56,8 @@ int main() {
             right = mid - 1;
         }
     }
+    //처음에는 count = N 갯수가 맞으면 그 cm을 출력했더니 틀렸다.
+    //왜 right를 뽑으면 맞는것일까??
     cout << right << endl;
     return 0;
 }
