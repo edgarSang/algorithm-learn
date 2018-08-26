@@ -41,7 +41,7 @@ int main() {
 
     for(int i=1; i<=N; i++) {
         for(int j=1; j<=N; j++) {
-            scanf("%d", &A[i][j]);
+            scanf("%1d", &A[i][j]);
         }
     }
     solve(1,1,N);
