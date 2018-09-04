@@ -1,112 +1,48 @@
 #include <iostream>
-#include <vector>
-#include <stack>
+#include <cstdio>
 #include <queue>
 
 using namespace std;
-int N, M, V;
-int check[1001] = {0};
-vector<int> A[1001];
 
-// void dfsMatrix(int v) {
-//     cout << v << " ";
-//     check[v] = 1;
-//     for(int i=1; i<=N; i++){
-//         if(arr[v][i] == 1 && !check[i])
-//             dfs(i);
-//     }
-// }
+int A[100000][2];
+bool check[100000] = {false,};
+int dis[100000] = {99999,};
 
-void dfsList(int v) {
-    std::fill_n(check, M, 0);
-    stack<int> s;
-    s.push(v);
-
-    while(!s.empty()) {
-        int top = s.top();
-        s.pop();
-        
-        if(check[top]) continue;
-        check[top] = 1;
-        cout << top << " ";
-
-        for(int i=0; i<A[top].size(); i++) {
-            if(check[A[top][i]] == 0) {
-                s.push(A[top][i]);
-            }
-        }
-    }
-}
-
-void bfsList(int v) {
-    std::fill_n(check, M, 0);
+void bfs(int start, int end) {
     queue<int> q;
-    check[v] = 1;
-    q.push(v);
+    q.push(start);
+    dis[start] = 0;
+    check[start] = true;
 
     while(!q.empty()) {
-        int x = q.front();
+        int top = q.front();
         q.pop();
-        cout << x << " ";
-        for(int i=0;i<A[x].size();i++) {
-            if(check[A[x][i]] == 0) {
-                check[A[x][i]] = 1;
-                q.push(A[x][i]);
+        
+        for(int i=0; i<2; i++) {
+            if(check[A[top][i]] == false) {
+                check[A[top][i]] = true;
+                q.push(A[top][i]);
+                dis[A[top][i]] = dis[top]+1 < dis[A[top][i]] ? dis[top] + 1 : dis[A[top][i]]; 
+                if(A[top][i] == end) {
+                    printf("%d", dis[end]);
+                    return;
+                }
             }
         }
     }
 }
 
 int main() {
-    cin >> N >> M >> V;
-    
-    for(int i=1;i<=M;i++) {
-        int u,e;
-        cin >> u >> e;
-        A[u].push_back(e);
-        A[e].push_back(u);
+    int N,K;
+    scanf("%d %d", &N, &K);
+    if(N <= K) {
+        for(int i=N; i<K; i++){
+            A[i][0] = i+1;
+            A[i][1] = i*2;
+        }
     }
-    dfsList(V);
-    cout << endl;
-    bfsList(V);
-    
+
+    bfs(N, K);
+
     return 0;
 }
-
-    // vector<int> A[10];
-
-    // for(int i=0; i<=N; i++){
-    //     int u, e;
-    //     scanf("%d %d", &u, &e);
-    //     A[u].push_back(e); 
-    //     A[e].push_back(u);
-    // }
-
-    // int A[N][N];
-    //인접 행렬로 입력받기.
-    // int A[N+1][N+1] = {0,};
-    // for(int i=1; i<=M; i++) {
-    //     cin >> u >> e;
-    //     A[u][e] = A[e][u] = 1;
-    // } 
-
-
-        // stack<int> s;
-    // s.push(v);
-    
-    // while(!s.empty()) {
-    //     int top = s.top();
-    //     s.pop();
-        
-    //     if(check[top]) continue;
-
-    //     check[top] = 1;
-    //     cout << top << " ";
-
-    //     for(int i=0;i<A[top].size();i++) {
-    //         if(!check[A[top][i]]) {
-    //             s.push(A[top][i]);
-    //         }
-    //     }
-        
-    // }
