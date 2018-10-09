@@ -9,7 +9,9 @@ string A, T;
 stack<char> L, R;
 int lIdx = 0, rIdx = 0, aIdx = 0;
 int flag = 1;
-
+bool checkStr() {
+    
+}
 int lPush() {
     aIdx = 0;
     while(lIdx <= rIdx) {
