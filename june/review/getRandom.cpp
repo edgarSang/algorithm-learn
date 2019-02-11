@@ -6,6 +6,7 @@
 #include <dirent.h> 
 #include <stdio.h> 
 #include <algorithm>
+#include <ctime>
 
 using namespace std;
 
@@ -38,13 +39,17 @@ int main() {
     }
 
     string r;
-    while (true) { 
+    int cnt = 0;
+    while (true) {
+        cnt++;
+        srand((unsigned int)time(0));
         r = words[rand()%words.size()];
         if(find(exists.begin(), exists.end(), r) != exists.end()) {
             /*contain*/
         } else {
             /*r does not contain */
             cout << r << endl;
+            cout << "cnt: " << cnt << endl;
             break;
         }
     }
