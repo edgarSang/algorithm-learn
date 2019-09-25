@@ -15,6 +15,7 @@ bool check(int tempH) {
             return true;
         }
     }
+
     return false;
 }
 

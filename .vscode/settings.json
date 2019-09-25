@@ -1,6 +1,7 @@
 {
     "git.ignoreLimitWarning": true,
     "files.associations": {
+        "*.js": "javascriptreact",
         "iostream": "cpp",
         "ostream": "cpp",
         "array": "cpp",
@@ -33,6 +34,7 @@
         "tuple": "cpp",
         "typeinfo": "cpp",
         "utility": "cpp",
-        "algorithm": "cpp"
+        "algorithm": "cpp",
+        "queue": "cpp"
     }
 }
