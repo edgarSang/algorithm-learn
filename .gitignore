@@ -1,4 +1,6 @@
 *.exe
+*.ipch
 **/tempCodeRunnerFile.cpp
 june/2middle1/12search6/kakao1.cpp
 june/2middle1/12search6/kakao2.cpp
+*.bin
