@@ -1,5 +1,8 @@
 #include <cstdio>
 #define MAX 500
+#include <math.h>
+#define MIN(a,b) ((a)>(b)? (b):(a))
+
 
 int A[MAX];
 
@@ -11,22 +14,31 @@ int main() {
     int N,K;
     long long sum=0;
     //평균,표준편차,분산
-    double m,s,v = 0;
+    double m,ts=0,s=987654321,v=0;
 
     scanf("%d %d", &N, &K);
     for(int i=0; i<N; i++) {
         scanf("%d", &A[i]);
-        sum+=A[i];
     }
 
-    m = sum/N;
 
-    for(int i=0; i<N; i++) {
-        s += pow(A[i] - m);     
+    for(int i=0; i<N-K+1; i++) {
+        for(int k=K; k<=N-i;k++) {
+            ts=v=sum=0;
+            for(int j=i; j<i+k; j++) {
+                sum+=A[j];
+            }
+            m =  sum/(double)k;
+            for(int j=i; j<i+k; j++) {
+                ts += pow(A[j] - m);
+            }
+            // printf("%d: %f / %d m:%f \n", i,ts,K,m);
+            s = MIN(s, sqrt(ts/(double)k));
+        }
     }
-    s = s/N;
+    
 
-    printf("m:%lf, s:%lf\n%lf\n", m,s, pow(s));
+    printf("%.11lf\n", s);
 
     return 0;
 }
